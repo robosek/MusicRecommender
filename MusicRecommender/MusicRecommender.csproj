@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Recommendation\" />
+    <None Remove="Recommendation\Adapters\" />
+    <None Remove="Recommendation\Application\" />
+    <None Remove="Recommendation\Domain\" />
+    <None Remove="Recommendation\Adapter\In\" />
+    <None Remove="Recommendation\Adapter\Out\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Recommendation\" />
+    <Folder Include="Recommendation\Adapter\" />
+    <Folder Include="Recommendation\Application\" />
+    <Folder Include="Recommendation\Domain\" />
+    <Folder Include="Recommendation\Adapter\In\" />
+    <Folder Include="Recommendation\Adapter\Out\" />
+  </ItemGroup>
+</Project>
