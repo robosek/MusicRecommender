@@ -17,10 +17,7 @@
     <None Remove="Recommendation\Adapter\Out\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Recommendation\" />
     <Folder Include="Recommendation\Adapter\" />
-    <Folder Include="Recommendation\Application\" />
-    <Folder Include="Recommendation\Domain\" />
     <Folder Include="Recommendation\Adapter\In\" />
     <Folder Include="Recommendation\Adapter\Out\" />
   </ItemGroup>
