@@ -1,6 +1,6 @@
 ﻿namespace MusicRecommender.Recommendation.Application.Port.In
 {
-    public class SearchDTO
+    public class SearchRecommendationsDTO
     {
         public string Author { get; set; }
         public string Song { get; set; }
