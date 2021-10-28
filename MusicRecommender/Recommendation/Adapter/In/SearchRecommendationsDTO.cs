@@ -1,4 +1,4 @@
-﻿namespace MusicRecommender.Recommendation.Application.Port.In
+﻿namespace MusicRecommender.Recommendation.Adapter.In
 {
     public class SearchRecommendationsDTO
     {

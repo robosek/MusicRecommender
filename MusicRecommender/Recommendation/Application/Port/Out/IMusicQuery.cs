@@ -5,6 +5,6 @@ namespace MusicRecommender.Recommendation.Application.Port.Out
 {
     public interface IMusicQuery
     {
-        public Task<List<MusicSearchResult>> SearchMusic(string query, int year, string genre);
+        public Task<List<MusicSearchResult>> SearchMusic(string query, int? year, string genre);
     }
 }
