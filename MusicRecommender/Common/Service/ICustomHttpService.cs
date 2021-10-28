@@ -5,6 +5,8 @@ namespace MusicRecommender.Common.Service
 {
     public interface ICustomHttpService
     {
-        public Task<T> GetDataAsync<T>(Uri url);
+        public Task<T> GetDataAsync<T>(Url url, BearerToken token);
+
+        public Task<T> ClientCredentialsToken<T>(Url url, ClientCredentials credentials);
     }
 }

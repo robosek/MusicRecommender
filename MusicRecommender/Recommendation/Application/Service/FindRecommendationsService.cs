@@ -7,25 +7,16 @@ namespace MusicRecommender.Recommendation.Application.Service
 {
     public class FindRecommendationsService : IFindRecommendationsUseCase
     {
-        private readonly IGetMusicBySong getMusicBySong;
-        private readonly IGetMusicByArtist getMusicByArtist;
-        private readonly IGetMusicByGenre getMusicByGenre;
-        private readonly IGetMusicByYear getMusicByYear;
+        private readonly IMusicQuery getMusicQuery;
 
-        public FindRecommendationsService(IGetMusicBySong getMusicBySong, 
-            IGetMusicByArtist getMusicByArtist, 
-            IGetMusicByGenre getMusicByGenre, 
-            IGetMusicByYear getMusicByYear)
+        public FindRecommendationsService(IMusicQuery getMusicQuery)
         {
-            this.getMusicBySong = getMusicBySong;
-            this.getMusicByArtist = getMusicByArtist;
-            this.getMusicByGenre = getMusicByGenre;
-            this.getMusicByYear = getMusicByYear;
+            this.getMusicQuery = getMusicQuery;
         }
 
         public Recommendations FindRecommendations(SearchRecommendationsCommand command)
         {
-            getMusicByArtist.GetMusicByArtist(command.Author);
+            getMusicQuery.SearchMusic(command.Author, command.Year, command.Genre);
 
             throw new NotImplementedException();
         }

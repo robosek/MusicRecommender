@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MusicRecommender.Recommendation.Application.Port.Out;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -24,22 +25,12 @@ namespace MusicRecommender.Recommendation.Domain
             Priority = priority;
         }
 
-        //public static Recommendation Create(AuthorSearchResult authorSearchResult)
-        //{
-        //    return new Recommendation();
-        //}
-        //public static Recommendation Create(SongNameSearchResult authorSearchResult)
-        //{
-        //    return new Recommendation();
-        //}
-        //public static Recommendation Create(GenreSearchResult authorSearchResult)
-        //{
-        //    return new Recommendation();
-        //}
-        //public static Recommendation Create(YearSearchResult authorSearchResult)
-        //{
-        //    return new Recommendation();
-        //}
+        public static Recommendation Create(MusicSearchResult musicSearchResult)
+        {
+            //return new Recommendation();
+            return null;
+        }
+
     }
 
     public enum Priority
