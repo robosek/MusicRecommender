@@ -2,6 +2,8 @@
 using MusicRecommender.Recommendation.Application.Port.Out;
 using MusicRecommender.Recommendation.Domain;
 using System;
+using System.Threading.Tasks;
+using System.Linq;
 
 namespace MusicRecommender.Recommendation.Application.Service
 {
@@ -14,11 +16,12 @@ namespace MusicRecommender.Recommendation.Application.Service
             this.getMusicQuery = getMusicQuery;
         }
 
-        public Recommendations FindRecommendations(SearchRecommendationsCommand command)
+        public async Task<Recommendations> FindRecommendations(SearchRecommendationsCommand command)
         {
-            getMusicQuery.SearchMusic(command.Author, command.Year, command.Genre);
+            var musicSearchResults = await getMusicQuery.SearchMusic(command.Author, command.Year, command.Genre);
+            var recommendations = musicSearchResults.Select(music => new Domain.Recommendation(music, command.Market));
 
-            throw new NotImplementedException();
+            return new Recommendations(recommendations.ToList());
         }
     }
 }

@@ -1,9 +1,10 @@
 ﻿using MusicRecommender.Recommendation.Domain;
+using System.Threading.Tasks;
 
 namespace MusicRecommender.Recommendation.Application.Port.In
 {
-    interface IFindRecommendationsUseCase
+    public interface IFindRecommendationsUseCase
     {
-        public Recommendations FindRecommendations(SearchRecommendationsCommand command);
+        public Task<Recommendations> FindRecommendations(SearchRecommendationsCommand command);
     }
 }

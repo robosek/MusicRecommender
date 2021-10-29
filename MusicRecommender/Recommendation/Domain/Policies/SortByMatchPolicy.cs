@@ -3,9 +3,9 @@ using System.Linq;
 
 namespace MusicRecommender.Recommendation.Domain.Policies
 {
-    public class SortByPopluarityPolicy : ISortRecommendationsPolicy
+    public class SortByMatchPolicy : ISortRecommendationsPolicy
     {
         public IEnumerable<Recommendation> Sort(List<Recommendation> recommendations)
-            => recommendations.OrderBy(recommendation => recommendation.Popularity);
+            => recommendations.OrderBy(recommendation => recommendation.Match);
     }
 }

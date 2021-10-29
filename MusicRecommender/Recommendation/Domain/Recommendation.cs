@@ -1,42 +1,40 @@
 ﻿using MusicRecommender.Recommendation.Application.Port.Out;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace MusicRecommender.Recommendation.Domain
 {
     public class Recommendation
     {
-        public string Author { get; }
         public string SongName { get; }
-        public int Popularity { get; }
-        public string Genre { get; }
-        public int Year { get; set; }
-        public Priority Priority { get; }
+        public double Match { get; }
+        public int Year { get; }
+        public RecommendationMetadata Metadata { get; }
+
+        private readonly string[] _availableMarkets;
+        private readonly string _targetMarket;
+        private const int MATCH_FACTOR = 100;
         
-        private Recommendation(string author, string songName, string genre, int year, int popluarity, Priority priority)
+        public Recommendation(MusicSearchResult musicSearchResult, string targetMarket)
         {
-            Author = author;
-            SongName = songName;
-            Genre = genre;
-            Year = year;
-            Popularity = popluarity;
-            Priority = priority;
+            SongName = musicSearchResult.Name;
+            Year = musicSearchResult.ReleaseDate.Year;
+            Metadata = new RecommendationMetadata
+            {
+                Uri = musicSearchResult.Uri,
+                Href = musicSearchResult.Href,
+                PreviewUrl = musicSearchResult.PreviewUrl
+            };
+            _availableMarkets = musicSearchResult.AvailableMarkets;
+            _targetMarket = targetMarket;
+            Match = CountRecommendationMatch(musicSearchResult.Popularity);
         }
 
-        public static Recommendation Create(MusicSearchResult musicSearchResult)
+        private double CountRecommendationMatch(Popluarity popluarity)
         {
-            //return new Recommendation();
-            return null;
+            var availableInTargetMarket = _availableMarkets.Select(market => market.ToLower()).Contains(_targetMarket.ToLower());
+            var adjustedPopularityValue = (popluarity.Value / (double) popluarity.MaxValue) * MATCH_FACTOR;
+
+            return availableInTargetMarket ? adjustedPopularityValue : adjustedPopularityValue - 30;
         }
-
-    }
-
-    public enum Priority
-    {
-        Low,
-        Medium,
-        High
     }
 }

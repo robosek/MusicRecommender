@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace MusicRecommender.Recommendation.Domain
+﻿namespace MusicRecommender.Recommendation.Domain
 {
     public class RecommendationMetadata
     {
-        public Uri Uri { get; set; }
+        public string Href { get; set; }
+        public string PreviewUrl { get; set; }
+        public string Uri { get; set; }
     }
 }

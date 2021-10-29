@@ -2,8 +2,8 @@
 
 namespace MusicRecommender.Recommendation.Domain.Policies
 {
-    interface ISortRecommendationsPolicy
+    public interface ISortRecommendationsPolicy
     {
-        IEnumerable<Recommendation> Sort(List<Recommendation> recommendations);
+        public IEnumerable<Recommendation> Sort(List<Recommendation> recommendations);
     }
 }
