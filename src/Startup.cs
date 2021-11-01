@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -31,7 +32,7 @@ namespace MusicRecommender
                 .ConfigureApplicationPartManager(manager =>
             {
                 manager.FeatureProviders.Add(new CustomControllerFeatureProvider());
-            }); 
+            });
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MusicRecommender", Version = "v1" });
@@ -49,9 +50,10 @@ namespace MusicRecommender
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MusicRecommender v1"));
             }
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MusicRecommender v1"));
 
             app.UseHttpsRedirection();
 
@@ -61,6 +63,7 @@ namespace MusicRecommender
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapGet("/", context => context.Response.WriteAsync("Music Recommender API"));
                 endpoints.MapControllers();
             });
         }
