@@ -17,4 +17,10 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\MusicRecommender.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <None Remove="Recommendation\Common\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Recommendation\Common\" />
+  </ItemGroup>
 </Project>

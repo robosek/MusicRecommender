@@ -5,11 +5,15 @@ namespace MusicRecommender.Common
     public class BearerToken
     {
         public string Value { get; }
+        public DateTime ExpiresIn { get; }
 
-        public BearerToken(string value)
+        private const int OFFSET_TIME_SECONDS = 60;
+
+        public BearerToken(string value, int expiresIn)
         {
             ValidateToken(value);
             Value = value;
+            ExpiresIn = DateTime.Now.AddSeconds(expiresIn - OFFSET_TIME_SECONDS);
         }
 
         private void ValidateToken(string value)

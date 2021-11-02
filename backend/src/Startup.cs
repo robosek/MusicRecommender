@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Controllers;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -48,6 +49,7 @@ namespace MusicRecommender
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MusicRecommender", Version = "v1" });
             });
 
+            services.AddSingleton<IMemoryCache, MemoryCache>();
             services.AddScoped<ICustomHttpService, CustomHttpService>();
             services.AddScoped<IMusicQuery, SpotifyService>();
             services.AddScoped<IFindRecommendationsUseCase, FindRecommendationsService>();
