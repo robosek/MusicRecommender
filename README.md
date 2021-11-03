@@ -1,6 +1,7 @@
-#Music recommender
+# Music recommender
 
-Miro: https://miro.com/app/board/o9J_loR-Nqs=/
+## Event storming session results
+https://miro.com/app/board/o9J_loR-Nqs=/
 
 ## Prerequisites
 Install Docker on your machine. 
