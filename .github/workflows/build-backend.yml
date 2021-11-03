@@ -1,0 +1,47 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+env:
+  DOTNET_VERSION: '5.0.x'
+  PUBLISH_DIRECTORY: 'music-recommender-api'
+  PACKAGE_NAME: 'music-recommender-api'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+      - name: Fetch all history for all tags and branches
+        run: git fetch --prune --unshallow
+      - name: Install GitVersion
+        uses: gittools/actions/gitversion/setup@v0.9.9
+        with:
+          versionSpec: '5.6.x'
+      - name: Use GitVersion
+        id: gitversion
+        uses: gittools/actions/gitversion/execute@v0.9.9
+      - name: 'Show version'
+        run: |
+          echo "Major: ${{ steps.gitversion.outputs.major }}"
+          echo "Minor: ${{ steps.gitversion.outputs.minor }}"
+          echo "Patch: ${{ steps.gitversion.outputs.patch }}"
+          echo "SemVer: ${{ steps.gitversion.outputs.semVer }}"
+      - name: 'dotnet restore'
+        run: cd backend && dotnet restore
+      - name: 'dotnet build'
+        run: cd backend && dotnet build --configuration Release
+      - name: 'dotnet publish'
+        run: cd backend && dotnet publish -c Release /p:AssemblyVersion=${{ steps.gitversion.outputs.assemblySemFileVer }} /p:FileVersion=${{ steps.gitversion.outputs.assemblySemFileVer }} /p:InformationalVersion=${{ steps.gitversion.outputs.Sha }} -o './${{ env.PUBLISH_DIRECTORY }}'
+      - name: Archive publish 
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ env.PACKAGE_NAME }}.${{ steps.gitversion.outputs.NuGetVersion }}
+          path: ./${{ env.PUBLISH_DIRECTORY }} 
