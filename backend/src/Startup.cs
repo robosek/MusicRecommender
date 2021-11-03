@@ -32,9 +32,7 @@ namespace MusicRecommender
                 options.AddPolicy(name: "cors",
                                   builder =>
                                   {
-                                      builder.AllowAnyOrigin()
-                                             .AllowAnyHeader()
-                                             .AllowAnyOrigin();
+                                      builder.WithOrigins("http://localhost:3000");
                                   });
             });
 
