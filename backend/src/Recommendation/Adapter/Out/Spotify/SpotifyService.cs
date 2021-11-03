@@ -5,10 +5,8 @@ using MusicRecommender.Common.Service;
 using MusicRecommender.Recommendation.Application;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
-[assembly: InternalsVisibleTo("MusicRecommender.UnitTests")]
 namespace MusicRecommender.Recommendation.Adapter.Out.Spotify
 {
     internal class SpotifyService : IMusicQuery

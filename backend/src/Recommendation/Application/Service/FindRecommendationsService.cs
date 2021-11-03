@@ -2,9 +2,7 @@
 using System.Threading.Tasks;
 using System.Linq;
 using MusicRecommender.Recommendation.Adapter.In;
-using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("MusicRecommender.UnitTests")]
 namespace MusicRecommender.Recommendation.Application
 {
     internal class FindRecommendationsService : IFindRecommendationsUseCase
